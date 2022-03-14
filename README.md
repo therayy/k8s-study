@@ -51,3 +51,21 @@ kubectl top pod --sort-by='memory' --no-headers | head -1
 kubectl top pod --sort-by='cpu' --no-headers | tail -1
 ```
 </details>
+
+#### Q3. Task: Check to see how many nodes are ready (not including nodes tainted NoSchedule) and wrtie the number to /opt/KUSC00402/kusc00402.txt
+```bash
+kubectl config use-context k8s
+``` 
+<details>
+  <summary>Answer</summary>
+    ```bash
+    kubectl get nodes
+    kubectl get node | grep -i ready |wc -l
+    kubectl describe nodes | grep ready | wc -l
+    kubectl describe nodes | grep -i taint | grep -i noschedule | wc -l
+    echo 3 > /opt/KUSC00402/kusc00402.txt
+
+    JSONPATH='{range .items[*]}{@.metadata.name}:{range @.status.conditions[*]}{@.type}={@.status};{end}{end}' \
+    && kubectl get nodes -o jsonpath="$JSONPATH" | grep "Ready=True" > /opt/KUSC00402/kusc00402.txt
+    ```
+</details>
