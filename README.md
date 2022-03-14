@@ -28,7 +28,9 @@ kubectl uncordon <node-to-drain>
 </details>
 
 #### Q2. Task: From the pod label `name=cpu-user`, find pods running high CPU workloads and write the name of the pod consuiming most CPU to the file /opt/KUTROO401/KUTROO401.txt (which already exists).
-
+```bash
+kubectl config use-context k8s
+``` 
 <details>
   <summary>Answer</summary>
 
