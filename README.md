@@ -1,4 +1,4 @@
-### Q1. Task: Given an existing Kubernetes cluster running version 1.18.8, upgrade all of the Kubernetes control plane and node components on the master node only to version 1.19.0. You are also expected to upgrade `kubelet` and `kubectl` on the master node.
+#### Q1. Task: Given an existing Kubernetes cluster running version 1.18.8, upgrade all of the Kubernetes control plane and node components on the master node only to version 1.19.0. You are also expected to upgrade `kubelet` and `kubectl` on the master node.
 ```bash
 kubectl config use-context mk8s
 ``` 
