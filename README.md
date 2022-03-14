@@ -70,3 +70,121 @@ JSONPATH='{range .items[*]}{@.metadata.name}:{range @.status.conditions[*]}{@.ty
  && kubectl get nodes -o jsonpath="$JSONPATH" | grep "Ready=True" > /opt/KUSC00402/kusc00402.txt
 ```
 </details>
+
+#### Q4. Task: Monitor the logs of pod `foobar` and 
+- Extract log lines corresponding to error `unable-to-access-website`
+- Write them to `/opt/KUTR00101/foobar`
+```bash
+kubectl config use-context k8s
+``` 
+<details>
+  <summary>Answer</summary>
+
+```bash
+kubectl logs foobar  | grep 'unable-to-access-website' > /opt/KULM00201/foobar
+```
+</details>
+
+#### Q5. Task: Schedule a pod as follows:
+- Name: `nginx-kusc00401`
+- Image: `nginx`
+- Node selector: `disk=ssd`
+```bash
+kubectl config use-context k8s
+``` 
+<details>
+  <summary>Answer</summary>
+
+### [Answer 5](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/)
+
+```bash
+vi pod.yaml
+```
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-kusc00101
+  
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
+  nodeSelector:
+    disktype: ssd
+```
+```bash
+kubectl create –f pod.yaml \
+kubectl get pods
+```
+</details>
+
+#### Q6. Task: List all persistent volumes sorted by capacity, saving the full kubectl output to `/opt/KUCC00102/volume_list`. Use kubectl 's own functionality for sorting the output, and do not manipulate it any further.
+
+<details>
+  <summary>Answer</summary>
+
+### [Answer 6](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
+```bash
+# List PersistentVolumes sorted by capacity
+kubectl get pv --sort-by=.spec.capacity.storage
+```
+```bash
+kubectl get pv  --sort-by = .spec.capacity.storage > /opt/ KUCC00102/volume_list
+```
+</details>
+
+#### Q7. Task: Create a file: `/opt/KUCC00302/kucc00302.txt` that lists all pods that implement service `baz` in namespace `development`. The format of the file should be one pod name per line.
+> Note: selector: name=foo
+<details>
+  <summary>Answer</summary>
+
+### [Answer 7](https://kubernetes.io/docs/tasks/configure-pod-container/configure-volume-storage/)
+```bash
+kubectl describe service baz –n development
+```
+```bash
+kubectl get pods –l name=foo –n development –o NAME > /opt/KUCC00302/kucc00302.txt
+```
+</details>
+
+#### Q8. Task: Create a pod as follows:
+- Name: `non-persistent-redis`
+- container Image: `redis`
+- Volume with name: `cache-control`
+- Mount path: `/data/redis`
+- The pod should launch in the staging namespace be persistent.
+
+<details>
+  <summary>Answer</summary>
+
+### [Answer 8](https://kubernetes.io/docs/tasks/configure-pod-container/configure-volume-storage/)
+```bash
+vi volume.yaml
+```
+```bash
+apiVersion: v1
+kind: Pod
+metadata:
+  name: non-persistent-redis
+  namespace: staging
+spec:
+  containers:
+  - name: redis
+    image: redis
+    volumeMounts:
+    - name: cache-control
+      mountPath: /data/redis
+  volumes:
+  - name: cache-control
+    emptyDir: {}
+```
+```bash
+kubectl create –f volume.yaml
+```
+```bash
+kubectl get pods -n staging
+```
+</details>
