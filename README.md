@@ -188,3 +188,49 @@ kubectl create –f volume.yaml
 kubectl get pods -n staging
 ```
 </details>
+
+#### Q9. Task: List `nginx-dev` and `nginx-prod` pod and delete those pods
+
+<details>
+  <summary>Answer</summary>
+
+```bash
+# List PersistentVolumes sorted by capacity
+kubectl get pods -o wide
+```
+```bash
+kubectl delete pods nginx-dev nginx-prod
+```
+</details>
+
+#### Q10. Task: A Kubernetes worker node, named `wk8s-node-0` is in state `NotReady`, investigate why this is the case, and perform any appropriate steps to bring the node to a `Ready` state, ensuring that any changes are made permanent.
+
+```bash
+kubectl config use-context wk8s
+``` 
+> You can `ssh` to the failed node using:
+>> 
+```bash
+ssh wk8s-node-0   
+```
+> You can assume elevated privileges on the node with the following command:
+>>
+```bash
+sudp -i
+```
+
+<details>
+  <summary>Answer</summary>
+
+```bash
+kubectl get nodes  
+kubectl describe node wk8s-node-0 #view faulty node info
+ssh wk8s-node-0 #enter node01
+ps –aux | grep kubelet
+sudo -i
+systemctl status kubelet
+systemctl start kubelet
+systemctl enable kubelet
+```
+</details>
+
