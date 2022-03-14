@@ -26,3 +26,26 @@ sudo systemctl restart kubelet
 kubectl uncordon <node-to-drain>
 ```
 </details>
+
+#### Q2. Task: From the pod label `name=cpu-user`, find pods running high CPU workloads and write the name of the pod consuiming most CPU to the file /opt/KUTROO401/KUTROO401.txt (which already exists).
+
+<details>
+  <summary>Answer</summary>
+
+```bash
+kubectl top -l name=cpu-utilizer –A echo 'pod name' >>/opt/KUT00401/KUT00401.txt
+
+kubectl top pod --sort-by='cpu' --no-headers | head -1
+
+or
+
+kubectl top pods -l name=name-cpu-loader --sort-by=cpu
+echo ‘top pod name' >>/opt/KUTR00401/KUTR00401.txt
+
+or
+
+kubectl top node --sort-by='cpu' --no-headers | head -1
+kubectl top pod --sort-by='memory' --no-headers | head -1
+kubectl top pod --sort-by='cpu' --no-headers | tail -1
+```
+</details>
