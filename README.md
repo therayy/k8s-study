@@ -259,3 +259,20 @@ systemctl restart kublet
 systemctl enable kublet
 ```
 </details>
+
+#### Q12. Task: Set the node named `ek8s-node-1` as unavailable and reschedule all the pods running on it.
+
+```bash
+[student@node-1] > ssh ek8s
+```
+```bash
+kubectl config use-context ek8s
+```
+
+<details>
+  <summary>Answer</summary>
+```bash
+kubectl cordon ek8s-node-1
+kubectl drain ek8s-node-1 --delete-local-data --ignore-daemonsets --force
+```
+</details>
