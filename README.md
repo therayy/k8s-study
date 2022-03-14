@@ -234,3 +234,28 @@ systemctl enable kubelet
 ```
 </details>
 
+#### Q11. Task: Given a partially-functioning Kubernetes cluster, identify symptoms of failure on the cluster. Determine the node, the failing service, and take actions to bring up the failed service and restore the health of the cluster. Ensure that any changes are made permanently.
+
+> You can `ssh` to the relevant I nodes:
+>> 
+```bash
+[student@node-1]$ ssh <nodename>
+```
+> You can assume elevated privileges on the node with the following command:
+>>
+```bash
+[student@nodename]$ sudo –i
+```
+
+<details>
+  <summary>Answer</summary>
+
+```bash
+cat /var/lib/kubelet/config.yaml
+```
+```bash
+staticpodpath: /etc/kubernates/manifests
+systemctl restart kublet
+systemctl enable kublet
+```
+</details>
