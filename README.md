@@ -216,7 +216,7 @@ ssh wk8s-node-0
 > You can assume elevated privileges on the node with the following command:
 >>
 ```bash
-sudp -i
+sudo -i
 ```
 
 <details>
