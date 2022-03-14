@@ -164,7 +164,7 @@ kubectl get pods –l name=foo –n development –o NAME > /opt/KUCC00302/kucc0
 ```bash
 vi volume.yaml
 ```
-```bash
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
