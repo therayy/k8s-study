@@ -276,3 +276,23 @@ kubectl cordon ek8s-node-1
 kubectl drain ek8s-node-1 --delete-local-data --ignore-daemonsets --force
 ```
 </details>
+
+#### Q13. Task: Configure the `kubelet systemd-managed service`, on the node labelled with `name=wk8s-node-1`, to launch a pod containing a single container of image `httpd` named `webtool` automatically. Any `spec` files required should be placed in the `/etc/kubernetes/manifests` directory on the node.
+
+> You can `ssh` to the appropriate node using:
+>> 
+```bash
+[student@node-1]$ ssh wk8s-node-1
+```
+> You can assume elevated privileges on the node with the following command:
+>>
+```bash
+[student@wk8s-node-1]$ sudo –i
+```
+<details>
+  <summary>Answer</summary>
+```bash
+kubectl cordon ek8s-node-1
+kubectl drain ek8s-node-1 --delete-local-data --ignore-daemonsets --force
+```
+</details>
