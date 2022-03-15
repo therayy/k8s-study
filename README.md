@@ -291,8 +291,74 @@ kubectl drain ek8s-node-1 --delete-local-data --ignore-daemonsets --force
 ```
 <details>
   <summary>Answer</summary>
+
 ```bash
 kubectl cordon ek8s-node-1
 kubectl drain ek8s-node-1 --delete-local-data --ignore-daemonsets --force
+```
+</details>
+
+#### Q14. Task: Create a pod that echo `hello world` and then exists. Have the pod deleted automatically when it's completed
+
+> You can `ssh` to the appropriate node using:
+>> 
+```bash
+[student@node-1]$ ssh wk8s-node-1
+```
+> You can assume elevated privileges on the node with the following command:
+>>
+```bash
+[student@wk8s-node-1]$ sudo –i
+```
+<details>
+  <summary>Answer</summary>
+
+```bash
+kubectl cordon ek8s-node-1
+kubectl drain ek8s-node-1 --delete-local-data --ignore-daemonsets --force
+```
+</details>
+
+#### Q15. Task: Get list of all pods in all namespaces and write it to file `/opt/pods-list.yaml`
+<details>
+  <summary>Answer</summary>
+```bash
+kubectl get pods --all-namespaces > /opt/pods-list.yaml
+```
+</details>
+
+#### Q16. Task: Create a pod named `kucc4` with a single app container for each of the following images running inside (there may be between 1 and 4 images specified)
+`nginx + redis + memcached + consul`
+
+```bash
+kubectl config use-context k8s
+```
+<details>
+  <summary>Answer</summary>
+```yaml
+Multipod question: vi kucc4.yaml
+```
+```bash
+kubectl run kucc8 --image=nginx --dry-run -o yaml > kucc4.yaml
+```
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  name: kucc4
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+  - image: redis
+    name: redis
+  - image: memcached
+    name: memcached
+  - image: consul
+    name: consul
+```
+```bash
+kubectl create -f kucc8.yaml
 ```
 </details>
