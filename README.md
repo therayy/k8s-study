@@ -335,6 +335,7 @@ kubectl config use-context k8s
 ```
 <details>
   <summary>Answer</summary>
+
 ```yaml
 Multipod question: vi kucc4.yaml
 ```
@@ -361,4 +362,5 @@ spec:
 ```bash
 kubectl create -f kucc8.yaml
 ```
+
 </details>
