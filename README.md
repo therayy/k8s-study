@@ -364,3 +364,37 @@ kubectl create -f kucc8.yaml
 ```
 
 </details>
+
+
+#### Q17. Task: You have been asked to create a new `ClusterRole` for a deployment pipeline and bind it to a specific `ServiceAccount` scoped to a specific namespace. 
+- Create a new `ClusterRole` named `deployment-clusterrole`, which only allows to create the following resource types:
+    - `Deployment`
+    - `StatefulSet`
+    - `DaemonSet`
+- Create a new `ServiceAccount` name `cicd-token` in the existing namespace `app-team1`. 
+- Bind the new ClusterRole `deployment-clusterrole` to the new ServiceAccount `cicd-token`, limited to the namespace `app-team1`.
+
+```bash
+kubectl config use-context ek8s
+```
+
+<details>
+  <summary>Answer</summary>
+
+```bash
+kubectl create namespace app-team1
+```
+```bash
+kubectl create serviceaccount cicd-token -n app-team1 #create service account
+```
+```bash
+kubectl create clusterrole deployment-clusterrole --verb=create --resource=deployment,statefulset,daemonset  #create cluster role
+```
+```bash
+kubectl create rolebinding deployment-clusterrole --clusterrole=deployment-clusterrole --serviceaccount=default:cicd-token --namespace=app-team1
+```
+##### OR
+```bash
+kubectl create rolebinding cicd-clusterrole --clusterrole=deployment-clusterrole --serviceaccount=app-team1:cicd-token –n app-team1
+```
+</details>
